@@ -1,4 +1,4 @@
-package hello.hellospring.user.domain.DTO;
+package hello.hellospring.user.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

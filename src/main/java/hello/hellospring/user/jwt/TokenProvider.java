@@ -1,7 +1,6 @@
-package hello.hellospring.user.domain.jwt;
+package hello.hellospring.user.jwt;
 
-import hello.hellospring.user.domain.DTO.TokenDTO;
-import hello.hellospring.user.domain.User;
+import hello.hellospring.user.DTO.TokenDTO;
 import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import javax.crypto.spec.SecretKeySpec;
@@ -18,6 +18,10 @@ import java.security.Key;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Component
 public class TokenProvider{
@@ -78,6 +82,8 @@ public class TokenProvider{
     }
 
     public boolean validateToken(String token) {
+        Logger log = LoggerFactory.getLogger(TokenProvider.class);
+
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
