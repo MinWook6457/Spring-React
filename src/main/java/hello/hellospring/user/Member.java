@@ -1,7 +1,7 @@
 package hello.hellospring.user;
 
 import hello.hellospring.user.entity.authority;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
