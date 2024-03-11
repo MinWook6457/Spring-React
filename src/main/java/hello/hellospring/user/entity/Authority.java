@@ -1,5 +1,5 @@
 package hello.hellospring.user.entity;
 
-public enum authority {
+public enum Authority {
     ROLE_USER, ROLE_ADMIN
 }

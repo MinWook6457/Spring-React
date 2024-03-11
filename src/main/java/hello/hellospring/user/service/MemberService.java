@@ -1,8 +1,8 @@
 package hello.hellospring.user.service;
 
-import hello.hellospring.config.SecurityUtil;
+import hello.hellospring.user.config.SecurityUtil;
 import hello.hellospring.user.DTO.MemberResponseDTO;
-import hello.hellospring.user.Member;
+import hello.hellospring.user.entity.Member;
 import hello.hellospring.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +21,13 @@ public class MemberService {
         return memberRepository.findById(SecurityUtil.getCurrentMemberId())
                 .map(MemberResponseDTO::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+    }
+
+    @Transactional
+    public MemberResponseDTO changeMemberNickname(String email, String nickname) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+        member.setNickname(nickname);
+        return MemberResponseDTO.of(memberRepository.save(member));
     }
 
     @Transactional

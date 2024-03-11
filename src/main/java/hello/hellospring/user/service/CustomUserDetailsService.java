@@ -1,6 +1,6 @@
 package hello.hellospring.user.service;
 
-import hello.hellospring.user.Member;
+import hello.hellospring.user.entity.Member;
 import hello.hellospring.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

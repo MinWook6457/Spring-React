@@ -2,52 +2,44 @@ package hello.hellospring.user.jwt;
 
 import hello.hellospring.user.DTO.TokenDTO;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import javax.crypto.spec.SecretKeySpec;
-import java.util.Arrays;
-import java.util.Base64;
+import io.jsonwebtoken.security.Keys;
+
 import java.security.Key;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @Component
-public class TokenProvider{
+public class TokenProvider {
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
     private final Key key;
 
-    // 주의점: 여기서 @Value는 `springframework.beans.factory.annotation.Value`소속이다!
-    // lombok의 @Value와 착각하지 말것!
-    //  * @param secretKey
-    public TokenProvider(@Value("${jwt.secret}")String secretKey){
+    @Autowired
+    public TokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Base64.getDecoder().decode(secretKey);
-        this.key = new SecretKeySpec(keyBytes,"HmacSHA256");
+        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
-    // 토큰 생성
+
     public TokenDTO generateTokenDto(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        long now = (new Date()).getTime();
-
+        long now = System.currentTimeMillis();
         Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-
-        System.out.println(tokenExpiresIn);
 
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
@@ -61,7 +53,6 @@ public class TokenProvider{
                 .accessToken(accessToken)
                 .tokenExpiresIn(tokenExpiresIn.getTime())
                 .build();
-
     }
 
     public Authentication getAuthentication(String accessToken) {

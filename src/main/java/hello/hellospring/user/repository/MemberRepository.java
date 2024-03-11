@@ -2,7 +2,7 @@ package hello.hellospring.user.repository;
 
 import java.util.Optional;
 
-import hello.hellospring.user.Member;
+import hello.hellospring.user.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

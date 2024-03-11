@@ -1,37 +1,45 @@
-package hello.hellospring.user;
+package hello.hellospring.user.entity;
 
-import hello.hellospring.user.entity.authority;
-import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Entity
 @Getter
 @Builder
-@Table(name="User")
 @NoArgsConstructor
 public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="email" , nullable=false)
+    @Column(nullable = false)
     private String email;
 
-    @Column(name="password" , nullable=false)
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String nickname;
+
     @Enumerated(EnumType.STRING)
-    private authority authority;
+    private Authority authority;
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public void setPassword(String password) { this.password = password; }
+
     @Builder
-    public Member(Long id, String email, String password,
-                authority authority) {
+    public Member(Long id, String email, String password, String nickname, Authority authority) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
         this.authority = authority;
     }
-
 }

@@ -1,7 +1,7 @@
 package hello.hellospring.user.DTO;
 
-import hello.hellospring.user.Member;
-import hello.hellospring.user.entity.authority;
+import hello.hellospring.user.entity.Member;
+import hello.hellospring.user.entity.Authority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +16,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class MemberRequestDTO {
     private String email;
     private String password;
+    private String nickname;
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .authority(authority.ROLE_USER)
+                .nickname(nickname)
+                .authority(Authority.ROLE_USER)
                 .build();
     }
 

@@ -1,4 +1,4 @@
-package hello.hellospring.config;
+package hello.hellospring.user.config;
 
 import hello.hellospring.user.jwt.JwtFilter;
 import hello.hellospring.user.jwt.TokenProvider;

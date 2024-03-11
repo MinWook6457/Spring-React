@@ -1,4 +1,4 @@
-package hello.hellospring.config;
+package hello.hellospring.user.config;
 
 import hello.hellospring.user.jwt.JwtAccessDeniedHandler;
 import hello.hellospring.user.jwt.JwtAuthenticationEntryPoint;

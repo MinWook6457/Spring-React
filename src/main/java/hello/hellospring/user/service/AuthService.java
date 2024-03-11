@@ -3,7 +3,7 @@ package hello.hellospring.user.service;
 import hello.hellospring.user.DTO.MemberRequestDTO;
 import hello.hellospring.user.DTO.MemberResponseDTO;
 import hello.hellospring.user.DTO.TokenDTO;
-import hello.hellospring.user.Member;
+import hello.hellospring.user.entity.Member;
 import hello.hellospring.user.jwt.TokenProvider;
 import hello.hellospring.user.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
