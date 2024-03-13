@@ -11,4 +11,15 @@
 | Method | 기능  | REST API | Request |                                                                                                                                  Response                                                                                                                                  |
 |:------:|:---:|:--------:|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |  POST  |로그인|/auth/login/|  MemberRequestDTO : <br> { "email" : "token-test3@naver.com", <br>"password" : "test33", <br>"nickname" : "닉네임3" } | TokenDTO : { "grantType": "bearer", <br>"accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTcxMDI5Nzg5NH0.1CKQXy2aJnaxdjQgWKCkkpLwajE9XNODyu_LS-qLW1blSrWGKOzNPpDxZkUAdA3ZC7OjLWR7BdH9odVmTXs-QQ", <br>"tokenExpiresIn": 1710297894971} |
+
+
 ![image](https://github.com/MinWook6457/Spring-Security/assets/103114126/3fa70371-ff96-4943-86e8-09b08be6a74d)
+
+
+### 회원 정보 조회
+|Method|기능|REST API|Request|Response|
+|:---:|:---:|:---:|:---:|:---:|
+|GET|회원 정보 조회|/member/me | Authorization : 로그인 시 발급 받는 Access Token | MemberResponseDTO : <br> { "email": "token-test3@naver.com", <br>"nickname": "닉네임3"} |
+
+
+![image](https://github.com/MinWook6457/Spring-Security/assets/103114126/cb17b74f-fea7-467b-b3ec-5d03bbf280e4)
